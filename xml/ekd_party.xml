@@ -1,1 +1,58 @@
-/home/trytond-1.8.2/trytond/modules/ekd_company/xml/ekd_party.xml
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data>
+        <record model="ir.ui.view" id="party_view_form_new">
+            <field name="model">party.party</field>
+            <field name="type">form</field>
+            <field name="inherit" ref="party.party_view_form"/>
+            <field name="arch" type="xml">
+            <![CDATA[
+                <data>
+                    <xpath
+                        expr="/form/group[@id=&quot;gr_boolean&quot;]/field[@name=&quot;customer&quot;]"
+                        position="after">
+                        <label name="employee" />
+                        <field name="employee" xexpand="0" width="25"/>
+                    </xpath>
+                    <xpath
+                        expr="/form/notebook/page[@id=&quot;contacts&quot;]/field[@name=&quot;parent_party&quot;]"
+                        position="after">
+                        <label name="manager"/>
+                        <field name="manager"/>
+                    </xpath>
+<!-->
+                         expr="/form/notebook/page[@id=&quot;accounting&quot;]"
+                    <xpath
+                        expr="/form/label[@name=&quot;name&quot;]"
+                        position="replace">
+                    </xpath>
+                    <xpath
+                        expr="/form/field[@name=&quot;name&quot;]"
+                        position="replace">
+                    </xpath>
+                    <xpath
+                        expr="/form/label[@name=&quot;code&quot;]"
+                        position="replace">
+                    </xpath>
+                    <xpath
+                        expr="/form/field[@name=&quot;code&quot;]"
+                        position="replace">
+                    </xpath>
+                    <xpath
+                        expr="/form/label[@name=&quot;active&quot;]"
+                        position="replace">
+                    </xpath>
+                    <xpath
+                        expr="/form/field[@name=&quot;active&quot;]"
+                        position="replace">
+                    </xpath>
+<-->
+                </data>
+            ]]>
+            </field>
+        </record>
+
+    </data>
+</tryton>

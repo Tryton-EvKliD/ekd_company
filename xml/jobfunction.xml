@@ -1,1 +1,66 @@
-/home/trytond-1.8.2/trytond/modules/ekd_company/xml/jobfunction.xml
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data>
+        <record model="ir.ui.view" id="view_jobfunction_tree">
+            <field name="model">company.job_function</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <![CDATA[
+                <tree string="Job Function">
+                    <field name="name" select="1"/>
+                    <field name="shortname" select="1"/>
+                    <field name="note" select="2"/>
+                </tree>
+                ]]>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_jobfunction_form">
+            <field name="model">company.job_function</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <![CDATA[
+                <form string="Job Function" col="4">
+                    <label name="company"/>
+                    <field name="company"/>
+                    <label name="name"/>
+                    <field name="name"/>
+                    <label name="shortname"/>
+                    <field name="shortname"/>
+                    <label name="pay_period"/>
+                    <field name="pay_period"/>
+                    <label name="type_timesheet"/>
+                    <field name="type_timesheet"/>
+                    <label name="salary"/>
+                    <field name="salary"/>
+                    <label name="premium"/>
+                    <field name="premium"/>
+                    <newline/>
+                    <separator colspan="4" string="Notes" id="note" />
+                    <field colspan="4" name="note" />
+                </form>
+                ]]>
+            </field>
+        </record>
+
+        <record model="ir.action.act_window" id="act_jobfunction_form">
+            <field name="name">Job Function</field>
+            <field name="res_model">company.job_function</field>
+            <field name="view_type">form</field>
+        </record>
+        <record model="ir.action.act_window.view" id="act_jobfunction_form_view1">
+            <field name="sequence" eval="10"/>
+            <field name="view" ref="view_jobfunction_tree"/>
+            <field name="act_window" ref="act_jobfunction_form"/>
+        </record>
+        <record model="ir.action.act_window.view" id="act_jobfunction_form_view2">
+          <field name="sequence" eval="20"/>
+          <field name="view" ref="view_jobfunction_form"/>
+          <field name="act_window" ref="act_jobfunction_form"/>
+        </record>
+        <menuitem name="Job Function" parent="menu_company_configuration"
+              sequence="2" action="act_jobfunction_form"
+              id="menu_jobfunction_form"/>
+    </data>
+</tryton>

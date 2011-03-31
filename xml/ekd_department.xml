@@ -1,1 +1,125 @@
-/home/trytond-1.8.2/trytond/modules/ekd_company/xml/ekd_department.xml
+<?xml version="1.0" encoding="utf-8"?>
+<tryton>
+    <data>
+
+    <record model="res.group" id="group_department">
+        <field name="name">Department</field>
+    </record>
+    <record model="res.group" id="group_department_admin">
+        <field name="name">Department Administration</field>
+    </record>
+
+     <record id="view_department_tree" model="ir.ui.view">
+             <field name="model">ekd.company.department</field>
+            <field name="type">tree</field>
+            <field eval="4" name="priority"/>
+            <field name="arch" type="xml">
+                <![CDATA[
+                <tree string="department">
+                    <field name="name" select="2"/>
+                    <field name="shortname"/>
+                    <field name="chief"/>
+                    <field name="code"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="active"/>
+                </tree>
+                ]]>
+            </field>
+    </record>
+
+    <record id="view_department_form" model="ir.ui.view">
+            <field name="model">ekd.company.department</field>
+            <field name="type">form</field>
+            <field eval="2" name="priority"/>
+            <field name="arch" type="xml">
+                <![CDATA[
+                <form string="department">
+                    <group colspan="2" col="4" id="main_head">
+                        <label name="company" />
+                        <field name="company" />
+                        <label name="name" />
+                        <field name="name" />
+                        <label name="shortname" />
+                        <field name="shortname" />
+                        <label name="code" />
+                        <field name="code" />
+                        <label name="chief" />
+                        <field name="chief" />
+                        <label name="parent" />
+                        <field name="patent" />
+                        <label name="start_date" />
+                        <field name="start_date" />
+                        <label name="end_date" />
+                        <field name="end_date" />
+                        <label name="active" />
+                        <field name="active" />
+                        <label name="state" />
+                        <field name="state" />
+                        <label name="type_department" />
+                        <field name="type_department" />
+                        <label name="as_stock" />
+                        <field name="as_stock" />
+                    </group>
+                    <notebook>
+                        <page id="employees" string="Employees">
+                            <field name="employees" />
+                        </page>
+                        <page id="childs" string="Chields">
+                            <field name="childs" />
+                        </page>
+                        <page id="note" string="Notes">
+                            <field name="note" />
+                        </page>
+                    </notebook>
+                </form>
+                ]]>
+            </field>
+    </record>
+
+    <record model="ir.action.act_window" id="act_department_form">
+        <field name="name">Department</field>
+        <field name="res_model">ekd.company.department</field>
+        <field name="view_type">form</field>
+    </record>
+    <record model="ir.action.act_window.view" id="act_department_form_view1">
+        <field name="sequence" eval="10"/>
+        <field name="view" ref="view_department_tree"/>
+        <field name="act_window" ref="act_department_form"/>
+    </record>
+    <record model="ir.action.act_window.view" id="act_department_form_view2">
+        <field name="sequence" eval="20"/>
+        <field name="view" ref="view_department_form"/>
+        <field name="act_window" ref="act_department_form"/>
+    </record>
+
+    <menuitem name="Department" parent="ekd_company.menu_struct_configuration" action="act_department_form"
+            id="menu_department" groups="group_department,group_department_admin"
+                                sequence="10" icon="tryton-preferences"/>
+
+    <record model="ir.model.access" id="access_department1">
+        <field name="model" search="[('model', '=', 'ekd.company.department')]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_delete" eval="False"/>
+    </record>
+    <record model="ir.model.access" id="access_department2">
+        <field name="model" search="[('model', '=', 'ekd.company.department')]"/>
+        <field name="group" ref="group_department"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_delete" eval="False"/>
+    </record>
+    <record model="ir.model.access" id="access_department_admin">
+        <field name="model" search="[('model', '=', 'ekd.company.department')]"/>
+        <field name="group" ref="group_department_admin"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_delete" eval="True"/>
+    </record>
+
+    </data>
+</tryton>

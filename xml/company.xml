@@ -1,1 +1,380 @@
-/home/trytond-1.8.2/trytond/modules/ekd_company/xml/company.xml
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data>
+        <record model="res.group" id="group_company">
+            <field name="name">Company Ext</field>
+        </record>
+        <record model="res.group" id="group_company_admin">
+            <field name="name">Company Administration Ext</field>
+        </record>
+        <record model="res.user" id="res.user_admin">
+            <field name="groups"
+            eval="[('add', ref('group_company_admin')),]"/>
+        </record>
+
+        <menuitem name="Company Management" id="menu_company" sequence="40"
+            groups="group_company,group_company_admin"
+            icon="tryton-users"/>
+        <menuitem name="Configuration" parent="menu_company"
+            id="menu_company_configuration" groups="group_company_admin"
+            sequence="10" icon="tryton-preferences"/>
+        <menuitem name="Structual Company" parent="menu_company"
+            id="menu_struct_configuration"/>
+        <menuitem name="Employees" parent="menu_company"
+            id="menu_employees"/>
+
+        <record model="ir.ui.view" id="company_view_form">
+            <field name="model">company.company</field>
+            <field name="type">form</field>
+            <field name="inherit" ref="company.company_view_form"/>
+            <field name="arch" type="xml">
+                <![CDATA[
+                <data>
+                    <xpath
+                        expr="/form"
+                        position="replace_attributes">
+                        <form string="Company"/>
+                    </xpath>
+<!-->
+                    <xpath
+                        expr="/form/group[@id=&quot;head&quot;]/group[@id=&quot;head_txt&quot;]/group[@id=&quot;gr_head&quot;]/label[@name=&quot;code&quot;]"
+                        position="replace">
+                        <label name="parent"/>
+                    </xpath>
+                    <xpath
+                        expr="/form/group[@id=&quot;head&quot;]/group[@id=&quot;head_txt&quot;]/group[@id=&quot;gr_head&quot;]/field[@name=&quot;code&quot;]"
+                        position="replace">
+                        <field name="parent"/>
+                    </xpath>
+
+                    <xpath
+                        expr="/form/group[@id=&quot;head&quot;]/group[@id=&quot;head_txt&quot;]/group[@id=&quot;gr_boolean&quot;]/label[@name=&quot;active&quot;]"
+                        position="replace">
+                    </xpath>
+                    <xpath
+                        expr="/form/group[@id=&quot;head&quot;]/group[@id=&quot;head_txt&quot;]/group[@id=&quot;gr_boolean&quot;]/field[@name=&quot;active&quot;]"
+                        position="replace">
+                    </xpath>
+<-->
+
+                    <xpath
+                        expr="/form/notebook/page[@id=&quot;general&quot;]/group[@id=&quot;address&quot;]/group[@id=&quot;lang&quot;]/label[@name=&quot;lang&quot;]"
+                        position="before">
+                        <label name="active"/>
+                        <field name="active"/>
+                        <label name="currency"/>
+                        <field name="currency"/>
+                    </xpath>
+
+                    <xpath
+                        expr="/form/group[@id=&quot;gr_boolean&quot;]/label[@name=&quot;supplier&quot;]"
+                        position="replace">
+                    </xpath>
+                    <xpath
+                        expr="/form/group[@id=&quot;gr_boolean&quot;]/field[@name=&quot;supplier&quot;]"
+                        position="replace">
+                    </xpath>
+                    <xpath
+                        expr="/form/group[@id=&quot;gr_boolean&quot;]/field[@name=&quot;customer&quot;]"
+                        position="replace">
+                    </xpath>
+                    <xpath
+                        expr="/form/group[@id=&quot;gr_boolean&quot;]/label[@name=&quot;customer&quot;]"
+                        position="replace">
+                    </xpath>
+                    <xpath
+                        expr="/form/group[@id=&quot;gr_boolean&quot;]/label[@name=&quot;individual&quot;]"
+                        position="replace">
+                    </xpath>
+                    <xpath
+                        expr="/form/group[@id=&quot;gr_boolean&quot;]/field[@name=&quot;individual&quot;]"
+                        position="replace">
+                    </xpath>
+<!-->
+                    <xpath
+                        expr="/form/label[@name=&quot;name&quot;]"
+                        position="replace">
+                    </xpath>
+                    <xpath
+                        expr="/form/field[@name=&quot;name&quot;]"
+                        position="replace">
+                    </xpath>
+                    <xpath
+                        expr="/form/label[@name=&quot;parent&quot;]"
+                        position="replace">
+                    </xpath>
+                    <xpath
+                        expr="/form/field[@name=&quot;parent&quot;]"
+                        position="replace">
+                    </xpath>
+<-->
+                    <xpath
+                        expr="/form/label[@name=&quot;active&quot;]"
+                        position="replace">
+                    </xpath>
+                    <xpath
+                        expr="/form/field[@name=&quot;active&quot;]"
+                        position="replace">
+                    </xpath>
+                    <xpath
+                        expr="/form/label[@name=&quot;currency&quot;]"
+                        position="replace">
+                    </xpath>
+                    <xpath
+                        expr="/form/field[@name=&quot;currency&quot;]"
+                        position="replace">
+                    </xpath>
+                    <xpath
+                        expr="/form/label[@name=&quot;vat_country&quot;]"
+                        position="replace">
+                    </xpath>
+                    <xpath
+                        expr="/form/field[@name=&quot;vat_country&quot;]"
+                        position="replace">
+                    </xpath>
+                    <xpath
+                        expr="/form/label[@name=&quot;vat_number&quot;]"
+                        position="replace">
+                    </xpath>
+                    <xpath
+                        expr="/form/field[@name=&quot;vat_number&quot;]"
+                        position="replace">
+                    </xpath>
+                    <xpath
+                        expr="/form/notebook/page[@id=&quot;contacts&quot;]"
+                        position="replace">
+                        <page string="Preferences" col="4" id="preferences">
+                            <group colspan="2" col="2" id="chiefs">
+                                <separator string="Chiefs" colspan="2" id="sp_chiefs"/>
+                                <label name="ceo"/>
+                                <field name="ceo"/>
+                                <label name="ceo_acts"/>
+                                <field name="ceo_acts"/>
+                                <label name="cfo"/>
+                                <field name="cfo"/>
+                                <label name="ceo2"/>
+                                <field name="ceo2"/>
+                                <label name="cao"/>
+                                <field name="cao"/>
+                                <label name="cco"/>
+                                <field name="cco"/>
+                                <label name="cpo"/>
+                                <field name="cpo"/>
+                            </group>
+                            <group colspan="2" col="2" id="dates">
+                                <separator string="Calendary and Date Payes" colspan="2" id="sp_dates"/>
+                                <label name="pay_day"/>
+                                <field name="pay_day"/>
+                                <label name="advance_day"/>
+                                <field name="advance_day"/>
+                            </group>
+                            <!-->
+                            <group colspan="2" col="2" id="accounting">
+                                <separator string="Accounting" colspan="2" id="sp_accounting"/>
+                                <label name="vat_country" />
+                                <field name="vat_country" />
+                                <label name="vat_number" />
+                                <field name="vat_number" />
+                            </group>
+                            <-->
+                        </page>
+                    </xpath>
+                </data>
+                ]]>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="company_view_tree">
+            <field name="model">company.company</field>
+            <field name="type">tree</field>
+            <field name="field_childs">childs</field>
+            <field name="arch" type="xml">
+                <![CDATA[
+                <tree string="Companies">
+                    <field name="name" select="1"/>
+                    <field name="currency" select="1"/>
+                    <field name="vat_code" select="1"/>
+                </tree>
+                ]]>
+            </field>
+        </record>
+        <record model="ir.action.act_window" id="act_company_tree">
+            <field name="name">Companies</field>
+            <field name="res_model">company.company</field>
+            <field name="view_type">tree</field>
+            <field name="domain">[('parent', '=', False)]</field>
+        </record>
+        <record model="ir.action.act_window.view"
+            id="act_company_tree_view1">
+            <field name="sequence" eval="1"/>
+            <field name="view" ref="company_view_tree"/>
+            <field name="act_window" ref="act_company_tree"/>
+        </record>
+        <menuitem parent="menu_company" action="act_company_tree"
+            id="menu_company_tree"/>
+
+        <record model="ir.action.act_window" id="act_company_form">
+            <field name="name">Companies</field>
+            <field name="res_model">company.company</field>
+            <field name="view_type">form</field>
+        </record>
+        <record model="ir.action.act_window.view"
+            id="act_company_form_view1">
+            <field name="sequence" eval="10"/>
+            <field name="view" ref="company_view_tree"/>
+            <field name="act_window" ref="act_company_form"/>
+        </record>
+        <record model="ir.action.act_window.view"
+            id="act_company_form_view2">
+            <field name="sequence" eval="20"/>
+            <field name="view" ref="company_view_form"/>
+            <field name="act_window" ref="act_company_form"/>
+        </record>
+        <menuitem parent="menu_company_tree" action="act_company_form"
+            id="menu_company_form" name="Edit Companies"/>
+
+        <record model="ir.action.act_window" id="act_company_form2">
+            <field name="name">Companies</field>
+            <field name="res_model">company.company</field>
+            <field name="view_type">form</field>
+        </record>
+        <record model="ir.action.act_window.view"
+            id="act_company_form2_view1">
+            <field name="sequence" eval="10"/>
+            <field name="view" ref="company_view_form"/>
+            <field name="act_window" ref="act_company_form2"/>
+        </record>
+        <record model="ir.action.act_window.view"
+            id="act_company_form2_view2">
+            <field name="sequence" eval="20"/>
+            <field name="view" ref="company_view_tree"/>
+            <field name="act_window" ref="act_company_form2"/>
+        </record>
+        <menuitem parent="menu_company_tree" action="act_company_form2"
+            id="menu_company_form2" name="New Company"/>
+
+        <record model="ir.model.access" id="access_company_admin">
+            <field name="model" search="[('model', '=', 'company.company')]"/>
+            <field name="group" ref="group_company_admin"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_delete" eval="True"/>
+        </record>
+
+        <record model="ir.ui.view" id="user_view_form">
+            <field name="model">res.user</field>
+            <field name="inherit" ref="res.user_view_form"/>
+            <field name="arch" type="xml">
+                <![CDATA[
+                    <data>
+                        <!-->
+                        <xpath
+                            expr="/form/notebook/page/separator[@name=&quot;signature&quot;]"
+                            position="before">
+                            <label name="main_company"/>
+                            <field name="main_company"/>
+                            <label name="company"/>
+                            <field name="company"/>
+                            <label name="employee"/>
+                            <field name="employee"/>
+                        </xpath>
+                        <-->
+                        <xpath
+                            expr="/form/notebook/page[@id=&quot;preferences&quot;]"
+                            position="replace">
+                            <page string="Preferences" col="4" id="preferences">
+                                <group col="2" id="timezone">
+                                    <separator string="Language and TimeZone" colspan="2" id="sp_timezone"/>
+                                    <label name="language"/>
+                                    <field name="language" widget="selection"/>
+                                    <label name="timezone"/>
+                                    <field name="timezone"/>
+                                </group>
+                                <group col="2" id="default_period">
+                                    <separator string="Default Value Period and Current Date" colspan="2" id="sp_period"/>
+                                    <label name="start_period"/>
+                                    <field name="start_period"/>
+                                    <label name="end_period"/>
+                                    <field name="end_period"/>
+                                    <label name="current_date"/>
+                                    <field name="current_date"/>
+                                </group>
+                            </page>
+                        </xpath>
+                    </data>
+                ]]>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="user_view_form_preferences">
+            <field name="model">res.user</field>
+            <field name="inherit" ref="res.user_view_form_preferences"/>
+            <field name="arch" type="xml">
+                <![CDATA[
+                    <data>
+                        <xpath
+                            expr="/form/notebook/page[@id=&quot;preferences&quot;]"
+                            position="replace">
+                        </xpath>
+                        <xpath
+                            expr="/form/notebook/page[@id=&quot;user&quot;]"
+                            position="before">
+                            <page string="Preferences" col="4" id="preferences">
+                                <group col="2" id="company">
+                                    <separator string="Companies and Other" colspan="2" id="sp_company"/>
+                                    <label name="company"/>
+                                    <field name="company"/>
+                                </group>
+                                <group col="2" id="default_period">
+                                    <separator string="Default Value Period and Current Date" colspan="2" id="sp_period"/>
+                                    <label name="start_period"/>
+                                    <field name="start_period"/>
+                                    <label name="end_period"/>
+                                    <field name="end_period"/>
+                                    <label name="current_date"/>
+                                    <field name="current_date"/>
+                                </group>
+                                <group col="2" id="timezone">
+                                    <separator string="Language and TimeZone" colspan="2" id="sp_timezone"/>
+                                    <label name="language"/>
+                                    <field name="language" widget="selection"/>
+                                    <label name="timezone"/>
+                                    <field name="timezone"/>
+                                </group>
+                            </page>
+                        </xpath>
+                    </data>
+                ]]>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="user_view_tree_employee">
+            <field name="model">res.user</field>
+            <field name="inherit" ref="res.user_view_tree"/>
+            <field name="arch" type="xml">
+                <![CDATA[
+                    <data>
+                        <xpath
+                            expr="/tree/field[@name=&quot;name&quot;]"
+                            position="after">
+                            <field name="employee"/>
+                        </xpath>
+                    </data>
+                ]]>
+            </field>
+        </record>
+
+        <record model="ir.action.report" id="report_letter">
+            <field name="name">Letter</field>
+            <field name="model">party.party</field>
+            <field name="report_name">party.letter</field>
+            <field name="report">company/letter.odt</field>
+            <field name="style">company/header_A4.odt</field>
+        </record>
+        <record model="ir.action.keyword" id="report_letter_party">
+            <field name="keyword">form_print</field>
+            <field name="model">party.party,0</field>
+            <field name="action" ref="report_letter"/>
+        </record>
+    </data>
+</tryton>

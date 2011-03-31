@@ -1,1 +1,268 @@
-/home/trytond-1.8.2/trytond/modules/ekd_company/xml/employee_research.xml
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data>
+        <record model="ir.ui.view" id="employee_view_form_ext">
+            <field name="model">company.employee</field>
+            <field name="type">form</field>
+            <field name="priority" eval="20"/>
+            <field name="arch" type="xml">
+                <![CDATA[
+                <form string="Employee">
+                    <group col="12" colspan="12" id="head">
+                        <group colspan="6" id="head_txt">
+                            <group col="8" id="gr_head">
+                                <label align="0.0" name="name" string="Full Name Employee"/>
+                                <field colspan="2" name="name" />
+                                <label align="0.0" name="shortname"/>
+                                <field colspan="2" name="shortname" />
+                                <label align="0.0" name="uid_employee"/>
+                                <field name="uid_employee"/>
+                                <newline/>
+                                <label name="company"/>
+                                <field name="company"/>
+                                <label name="job_function"/>
+                                <field name="job_function"/>
+                                <label name="state"/>
+                                <field name="state"/>
+                            </group>
+                            <newline/>
+                            <group colspan="10" col="20" id="gr_boolean">
+                                <label name="active" />
+                                <field name="active" xexpand="0" width="25"/>
+                                <label name="peripatetic" />
+                                <field name="peripatetic" />
+                            </group>
+                        </group>
+                        <group col="2" colspan="2" id="head_photo">
+                            <field name="photo" widget="image" />
+                        </group>
+                    </group>
+                    <field name="individual" invisible="1"/>
+                    <field name="employee" invisible="1"/>
+                    <notebook>
+                        <page id="general" string="General">
+                            <group colspan="4" id="gr_spec">
+                                <group colspan="2" col="2" id="gr_date">
+                                    <label name="gender" />
+                                    <field name="gender" />
+                                    <label name="marital" />
+                                    <field name="marital" />
+                                    <label name="education" />
+                                    <field name="education" />
+                                    <label name="prof_education" />
+                                    <field name="prof_education" />
+                                    <label name="lang"/>
+                                    <field name="lang" widget="selection"/>
+                                </group>
+                                <group colspan="2" col="2" id="gr_date">
+                                    <label name="birthday" />
+                                    <field name="birthday" />
+                                    <label name="starting_date" />
+                                    <field name="starting_date" />
+                                    <label name="dismissal_date" />
+                                    <field name="dismissal_date" />
+<!-->
+                                    <label name="social_number"/>
+                                    <field name="social_number"/>
+                                    <label name="medical_date" />
+                                    <field name="medical_date" />
+                                    <label name="fluro_date" />
+                                    <field name="fluro_date" />
+<-->
+                                </group>
+                                <newline/>
+                                <group col="1" colspan="2" id="categories">
+                                    <separator string="Categories" id="categories"/>
+                                    <field name="categories">
+                                        <tree string="Categories" fill="1">
+                                            <field name="rec_name" select="1"/>
+                                        </tree>
+                                    </field>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Address and Contact" id="address">
+                            <field name="addresses" mode="form,tree" colspan="4">
+                                <tree string="Addresses" sequence="sequence" fill="1">
+                                    <field name="name"/>
+                                    <field name="street"/>
+                                    <field name="streetbis"/>
+                                    <field name="zip"/>
+                                    <field name="city"/>
+                                    <field name="country"/>
+                                    <field name="subdivision"/>
+                                    <field name="area_residence"/>
+                                </tree>
+                            </field>
+                            <field name="contact_mechanisms" colspan="2">
+                               <tree string="Contact Mechanisms" sequence="sequence" fill="1">
+                                   <field name="type"/>
+                                   <field name="value"/>
+                                   <field name="comment"/>
+                               </tree>
+                           </field>
+                            <field name="children" mode="tree" colspan="2">
+                               <tree string="Children of Emplyee" fill="1">
+                                   <field name="name"/>
+                                   <field name="birthday"/>
+                                   <field name="gender"/>
+                                   <field name="place"/>
+                               </tree>
+                           </field>
+                        </page>
+                        <page string="Accounting" id="accounting">
+                            <group col="6" id="accounting">
+                                <group col="2" id="accounting">
+                                    <separator string="VAT" colspan="2" id="vat"/>
+                                    <label name="vat_country"/>
+                                    <field name="vat_country"/>
+                                    <label name="vat_number"/>
+                                    <field name="vat_number"/>
+                                    <label name="pension_number"/>
+                                    <field name="pension_number"/>
+                                </group>
+                                <field name="document" mode="tree,form" colspan="4">
+                                    <tree string="Legal Document" sequence="sequence" fill="1">
+                                        <field name="typedoc"/>
+                                        <field name="number"/>
+                                        <field name="date_reg"/>
+                                        <field name="date_end"/>
+                                        <field name="active"/>
+                                        <field name="issued"/>
+                                    </tree>
+                                    <form string="Document">
+                                        <group id="document" col="8">
+                                            <label name="typedoc"/>
+                                            <field colspan="3" name="typedoc"/>
+                                            <label name="number"/>
+                                            <field colspan="1" name="number"/>
+                                            <label name="date_reg"/>
+                                            <field colspan="1" name="date_reg"/>
+                                            <label name="issued"/>
+                                            <field colspan="3" name="issued"/>
+                                            <label name="date_end"/>
+                                            <field colspan="1" name="date_end"/>
+                                            <label name="active"/>
+                                            <field colspan="1" name="active"/>
+                                            <label name="full_name"/>
+                                            <field colspan="3" name="full_name"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </group>
+                            <field name="banks" mode="tree,form" colspan="4">
+                                <tree string="Accounts in Banks" fill="1">
+                                    <field name="type_account"/>
+                                    <field name="bank_account"/>
+                                    <field name="bank_name"/>
+                                    <field name="bic"/>
+                                    <field name="corr_account"/>
+                                    <field name="end_date"/>
+                                    <field name="active"/>
+                                </tree>
+                                <form string="Account in Bank" col="6">
+                                    <label name="type_account"/>
+                                    <field name="type_account" xexpand="0" width="200"/>
+                                    <label name="bank_account"/>
+                                    <field name="bank_account" xexpand="0" width="160"/>
+                                    <newline/>
+                                    <group colspan="6" col="12" id="account">
+                                        <label name="bic"/>
+                                        <field name="bic" xexpand="0" width="100"/>
+                                        <label name="corr_account"/>
+                                        <field name="corr_account" xexpand="0" width="160"/>
+                                        <label name="bank_name"/>
+                                        <field colspan="3" name="bank_name" />
+                                    </group>
+                                    <newline/>
+                                    <group colspan="6" col="12" id="account">
+                                        <label  name="bank_address"/>
+                                        <field colspan="3" name="bank_address" />
+                                    </group>
+                                    <group colspan="2" col="20" id="checkboxes">
+                                        <label name="active"/>
+                                        <field name="active" xexpand="0" width="25"/>
+                                        <!-- Add here some checkboxes ! -->
+                                        <label name="end_date"/>
+                                        <field xexpand="0" width="100" name="end_date"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Education and Work Experience" id="education">
+                            <field name="educations" mode="tree" colspan="2">
+                               <tree string="Education" fill="1">
+                                   <field name="date_start"/>
+                                   <field name="date_end"/>
+                                   <field name="name"/>
+                                   <field name="prof_education"/>
+                               </tree>
+                            </field>
+                            <field name="experience" mode="tree" colspan="2">
+                               <tree string="Work Experience" fill="1">
+                                   <field name="date_start"/>
+                                   <field name="date_end"/>
+                                   <field name="company"/>
+                                   <field name="function"/>
+                               </tree>
+                            </field>
+                        </page>
+                        <page string="Other Properteis" id="properties">
+                            <field name="properties" colspan="2">
+                               <tree string="Advanced Properties" fill="1">
+                                   <field name="key"/>
+                                   <field name="value"/>
+                               </tree>
+                            </field>
+                            <group col="1" colspan="2" id="gr_notes">
+                                <separator string="Notes" id="sp_notes"/>
+                                <field name="note" colspan="2"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </form>
+                ]]>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="employee_view_tree_ext">
+            <field name="model">company.employee</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="20"/>
+            <field name="arch" type="xml">
+                <![CDATA[
+                <tree string="Employess">
+                    <field name="uid_employee" select="2"/>
+                    <field name="shortname" select="1"/>
+                    <field name="job_function" />
+                    <field name="phone" select="2"/>
+                    <field name="mobile" select="1"/>
+                    <field name="state" select="2"/>
+                    <field name="company"/>
+                </tree>
+                ]]>
+            </field>
+        </record>
+
+        <record model="ir.action.act_window" id="act_employee_form_ext">
+            <field name="name">Peripatetic Employees (Research)</field>
+            <field name="res_model">company.employee</field>
+            <field name="domain">[('peripatetic','=',True)]</field>
+            <field name="view_type">form</field>
+        </record>
+        <record model="ir.action.act_window.view" id="act_employee_form_ext_view1">
+            <field name="sequence" eval="10"/>
+            <field name="view" ref="employee_view_tree_ext"/>
+            <field name="act_window" ref="act_employee_form_ext"/>
+        </record>
+        <record model="ir.action.act_window.view" id="act_employee_form_ext_view2">
+            <field name="sequence" eval="20"/>
+            <field name="view" ref="employee_view_form_ext"/>
+            <field name="act_window" ref="act_employee_form_ext"/>
+        </record>
+        <menuitem parent="menu_employees" action="act_employee_form_ext"
+            id="menu_employee_form_ext"/>
+
+    </data>
+</tryton>

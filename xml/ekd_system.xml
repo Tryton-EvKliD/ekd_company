@@ -1,1 +1,24 @@
-/home/trytond-1.8.2/trytond/modules/ekd_company/xml/ekd_system.xml
+<?xml version="1.0"?>
+<!-- This file is part of Tryton.  The COPYRIGHT file at the top level of
+this repository contains the full copyright notices and license terms. -->
+<tryton>
+    <data noupdate="1">
+
+    <record model="ekd.company.employee.category"
+        id="employee_category_01">
+        <field name="name">Администативно-управленческий персонал</field>
+        <field name="shortname">АУП</field>
+    </record>
+    <record model="ekd.company.employee.category"
+        id="employee_category_02">
+        <field name="name">Инженерно-технический персонал</field>
+        <field name="shortname">ИТП</field>
+    </record>
+    <record model="ekd.company.employee.category"
+        id="employee_category_03">
+        <field name="name">Младший обслуживающий персонал</field>
+        <field name="shortname">МОП</field>
+    </record>
+
+    </data>
+</tryton>

@@ -1,1 +1,139 @@
-/home/trytond-1.8.2/trytond/modules/ekd_company/xml/ekd_staff_list.xml
+<?xml version="1.0" encoding="utf-8"?>
+<tryton>
+    <data>
+
+    <record model="res.group" id="group_staff_list">
+        <field name="name">Staff List</field>
+    </record>
+    <record model="res.group" id="group_staff_list_admin">
+        <field name="name">Staff List Administration</field>
+    </record>
+
+     <record id="view_staff_list_tree" model="ir.ui.view">
+             <field name="model">ekd.company.staff_list</field>
+            <field name="type">tree</field>
+            <field eval="4" name="priority"/>
+            <field name="arch" type="xml">
+                <![CDATA[
+                <tree string="Staff List">
+                    <field name="name" select="2"/>
+                    <field name="shortname"/>
+                    <field name="job_function" />
+                    <field name="category" />
+                    <field name="department" />
+                    <field name="work_rate" />
+                    <field name="free_rate" />
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                </tree>
+                ]]>
+            </field>
+    </record>
+
+    <record id="view_staff_list_form" model="ir.ui.view">
+            <field name="model">ekd.company.staff_list</field>
+            <field name="type">form</field>
+            <field eval="2" name="priority"/>
+            <field name="arch" type="xml">
+                <![CDATA[
+                <form string="Staff List">
+                    <group colspan="2" col="4" id="main_head">
+                        <label name="company" />
+                        <field name="company" />
+                        <label name="staff" />
+                        <field name="staff" />
+                        <label name="name" />
+                        <field name="name" />
+                        <label name="department" />
+                        <field name="department" />
+                        <label name="job_function" />
+                        <field name="job_function" />
+                        <label name="category" />
+                        <field name="category" />
+                        <label name="work_rate" />
+                        <field name="work_rate" />
+                        <label name="free_rate" />
+                        <field name="free_rate" />
+                    </group>
+                    <notebook>
+                        <page id="general" string="General">
+                            <label name="start_date" />
+                            <field name="start_date" />
+                            <label name="end_date" />
+                            <field name="end_date" />
+                            <label name="active" />
+                            <field name="active" />
+                            <label name="state" />
+                            <field name="state" />
+                            <label name="order" />
+                            <field name="order" />
+                            <label name="regular" />
+                            <field name="regular" />
+                            <label name="schedule" />
+                            <field name="schedule" />
+                            <label name="rate_payroll" />
+                            <field name="rate_payroll" />
+                            <label name="time_management" />
+                            <field name="time_management" />
+                        </page>
+                        <page id="payroll" string="Payroll">
+                            <field name="payroll" />
+                        </page>
+                        <page id="personal" string="Personal">
+                            <field name="personal" />
+                        </page>
+                        <page id="note" string="Notes">
+                            <field name="note" />
+                        </page>
+                    </notebook>
+                </form>
+                ]]>
+            </field>
+    </record>
+
+    <record model="ir.action.act_window" id="act_staff_list_form">
+        <field name="name">Staff List</field>
+        <field name="res_model">ekd.company.staff_list</field>
+        <field name="view_type">form</field>
+    </record>
+    <record model="ir.action.act_window.view" id="act_staff_list_form_view1">
+        <field name="sequence" eval="10"/>
+        <field name="view" ref="view_staff_list_tree"/>
+        <field name="act_window" ref="act_staff_list_form"/>
+    </record>
+    <record model="ir.action.act_window.view" id="act_staff_list_form_view2">
+        <field name="sequence" eval="20"/>
+        <field name="view" ref="view_staff_list_form"/>
+        <field name="act_window" ref="act_staff_list_form"/>
+    </record>
+
+    <menuitem name="Staff List" parent="ekd_company.menu_struct_configuration" action="act_staff_list_form"
+            id="menu_staff_list" groups="group_staff_list,group_staff_list_admin"
+                                sequence="10" icon="tryton-preferences"/>
+
+    <record model="ir.model.access" id="access_staff_list1">
+        <field name="model" search="[('model', '=', 'ekd.company.staff_list')]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_delete" eval="False"/>
+    </record>
+    <record model="ir.model.access" id="access_staff_list2">
+        <field name="model" search="[('model', '=', 'ekd.company.staff_list')]"/>
+        <field name="group" ref="group_staff_list"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_delete" eval="False"/>
+    </record>
+    <record model="ir.model.access" id="access_staff_list_admin">
+        <field name="model" search="[('model', '=', 'ekd.company.staff_list')]"/>
+        <field name="group" ref="group_staff_list_admin"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_delete" eval="True"/>
+    </record>
+
+    </data>
+</tryton>
